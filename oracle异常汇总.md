@@ -19,37 +19,44 @@ tags: ORACLE,异常
 # Oracle_ERRMG
 
 ## ORA-00000: 正常的成功的完成(操作)
+
 > ORA-00000: normal, successful completion
+
 ### 原因1: 正常执行完成。【部分验证】
+
 > Normal exit.
+
 * 分析: 此异常多数为程序没有执行SQL语句或者说成功执行完SQL语句，但人为或因逻辑有误，非要使用相关方法程序去获取Oracle的错误信息，得到此异常，实质是Oracle告知没有异常产生，猜测是异常信息的默认值为这个。目前发现以下两种情况:
 	1. 存储过程、PL/SQL块等，使用sqlerrm获取异常，如下例所示。【已验证】
-	```sql
-	declare
-	  v_sqlcode number;
-	  v_sqlerrm varchar2(4000);
-	begin
-	  /*
-		 ……
-		 相关执行代码
-		 ……
-	  */
-	  
-	  v_sqlcode := sqlcode;
-	  v_sqlerrm := sqlerrm;
-	  dbms_output.put_line('本次的异常code:' || v_sqlcode || chr(10) || '本次的异常信息:' || v_sqlerrm);
-	  
-	exception
-	  when others then
-		rollback;
-		v_sqlcode := sqlcode;
-		v_sqlerrm := sqlerrm;
-		dbms_output.put_line('本次的异常code:' || v_sqlcode || chr(10) || '本次的异常信息:' || v_sqlerrm);
-	end;
-	/
-	```
+	
+		```sql
+		declare
+		  v_sqlcode number;
+		  v_sqlerrm varchar2(4000);
+		begin
+		  /*
+			 ……
+			 相关执行代码
+			 ……
+		  */
+
+		  v_sqlcode := sqlcode;
+		  v_sqlerrm := sqlerrm;
+		  dbms_output.put_line('本次的异常code:' || v_sqlcode || chr(10) || '本次的异常信息:' || v_sqlerrm);
+
+		exception
+		  when others then
+			rollback;
+			v_sqlcode := sqlcode;
+			v_sqlerrm := sqlerrm;
+			dbms_output.put_line('本次的异常code:' || v_sqlcode || chr(10) || '本次的异常信息:' || v_sqlerrm);
+		end;
+		/
+		```
+	
 	2. 使用OCI的C程序中，用erhms()函数（OCIErrorGet()）获得Oracle错误信息。【未验证，网络汇总】
 * 措施: 无。【如果是人为需要获取该异常，则不用做任何操作；如果是逻辑有误，那么需要调整不去此异常或者在遇到此异常时将其屏蔽去掉。】
+
 	> None
 
 ### 原因2: hosts文件配置错误。【未验证，网络汇总】
@@ -62,9 +69,13 @@ tags: ORACLE,异常
 		```
 
 ## ORA-00001: 违反唯一约束条件 (string.string=>[拥有者].[约束名]) 
+
 > ORA-00001: unique constraint (string.string) violated
+
 ### 原因1: UPDATE或INSERT语句试图插入重复的键。对于在DBMS MAC模式下配置的Trusted Oracle，如果在不同级别存在重复条目，您可能会看到此信息。【已验证】
+
 > An UPDATE or INSERT statement attempted to insert a duplicate key. For Trusted Oracle configured in DBMS MAC mode, you may see this message if a duplicate entry exists at a different level.
+
 * 分析: 如下例所示，此异常一般为违反作用于表上的唯一约束或者主键约束导致，它们限制了表的一列或多列值的唯一性，不能插入重复数据。
 	```sql
 	-- 创建测试表
@@ -97,7 +108,9 @@ tags: ORACLE,异常
 	update ora_00001_1 set b = '2' where b = '1';
 	```
 * 措施: 删除唯一约束限制或不插入重复值。
+
 	> Either remove the unique restriction or do not insert the key.
+	
 	- 如果分析确定此处唯一约束或主键约束不需要，那么则可使用下面语句删除约束
 		```sql
 		-- 查询约束与索引信息
@@ -149,7 +162,6 @@ tags: ORACLE,异常
 		alter table [表名] drop primary key cascade drop index;
 		```
 	- 如果分析确定是值重复，那么需排查表数据与预执行的SQL语句的重复值冲突、同一个事务内执行的SQL语句之间的重复值冲突，去掉重复值的插入或更新。
-
 * 备注:
 	1. 唯一约束与主键约束的同:
 		- 都通过唯一索引来限制约束列的唯一性，确保任何使表中约束的列在行与行之间存在重复值的操作失败
@@ -162,15 +174,25 @@ tags: ORACLE,异常
 		- 主键可扩展作为外键，唯一约束不可
 
 ## ORA-00017: 会话被要求设置跟踪事件【ora12_ERRMG】
+
 > ORA-00017: session requested to set trace event
+
 ### 原因1: 当前会话被要求通过另一个会话设置一个跟踪事件
+
 > The current session was requested to set a trace event by another session.
+
 * 措施: 内部使用；无需操作。
+
 	> This is used internally; no action is required.
 
 ## ORA-待补充
+
 > ORA-待补充
+
 ### 原因1: 待补充
+
+> 待补充
+
 * 分析: 待补充
 * 措施: 待补充
 * 备注: 待补充
