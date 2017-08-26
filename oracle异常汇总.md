@@ -23,6 +23,7 @@ tags: ORACLE,异常
 
 ### 原因1: 正常执行完成。【部分验证】
 > Normal exit.
+
 * 分析: 此异常多数为程序没有执行SQL语句或者说成功执行完SQL语句，但人为或因逻辑有误，非要使用相关方法程序去获取Oracle的错误信息，得到此异常，实质是Oracle告知没有异常产生，猜测是异常信息的默认值为这个。目前发现以下两种情况:
 	1. 存储过程、PL/SQL块等，使用sqlerrm获取异常，如下例所示。【已验证】
 	```sql
@@ -67,6 +68,7 @@ tags: ORACLE,异常
 
 ### 原因1: UPDATE或INSERT语句试图插入重复的键。对于在DBMS MAC模式下配置的Trusted Oracle，如果在不同级别存在重复条目，您可能会看到此信息。【已验证】
 > An UPDATE or INSERT statement attempted to insert a duplicate key. For Trusted Oracle configured in DBMS MAC mode, you may see this message if a duplicate entry exists at a different level.
+
 * 分析: 如下例所示，此异常一般为违反作用于表上的唯一约束或者主键约束导致，它们限制了表的一列或多列值的唯一性，不能插入重复数据。
 	```sql
 	-- 创建测试表
@@ -168,6 +170,7 @@ tags: ORACLE,异常
 
 ### 原因1: 当前会话被要求通过另一个会话设置一个跟踪事件
 > The current session was requested to set a trace event by another session.
+
 * 措施: 内部使用；无需操作。
 	> This is used internally; no action is required.
 
