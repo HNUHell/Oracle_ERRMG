@@ -28,30 +28,30 @@ tags: ORACLE,异常
 
 * 分析: 此异常多数为程序没有执行SQL语句或者说成功执行完SQL语句，但人为或因逻辑有误，非要使用相关方法程序去获取Oracle的错误信息，得到此异常，实质是Oracle告知没有异常产生，猜测是异常信息的默认值为这个。目前发现以下两种情况:
 	1. 存储过程、PL/SQL块等，使用sqlerrm获取异常，如下例所示。【已验证】
-	```sql
-	declare
-	  v_sqlcode number;
-	  v_sqlerrm varchar2(4000);
-	begin
-	  /*
-		 ……
-		 相关执行代码
-		 ……
-	  */
-	  
-	  v_sqlcode := sqlcode;
-	  v_sqlerrm := sqlerrm;
-	  dbms_output.put_line('本次的异常code:' || v_sqlcode || chr(10) || '本次的异常信息:' || v_sqlerrm);
-	  
-	exception
-	  when others then
-		rollback;
-		v_sqlcode := sqlcode;
-		v_sqlerrm := sqlerrm;
-		dbms_output.put_line('本次的异常code:' || v_sqlcode || chr(10) || '本次的异常信息:' || v_sqlerrm);
-	end;
-	/
-	```
+		```sql
+		declare
+		  v_sqlcode number;
+		  v_sqlerrm varchar2(4000);
+		begin
+		  /*
+			 ……
+			 相关执行代码
+			 ……
+		  */
+
+		  v_sqlcode := sqlcode;
+		  v_sqlerrm := sqlerrm;
+		  dbms_output.put_line('本次的异常code:' || v_sqlcode || chr(10) || '本次的异常信息:' || v_sqlerrm);
+
+		exception
+		  when others then
+			rollback;
+			v_sqlcode := sqlcode;
+			v_sqlerrm := sqlerrm;
+			dbms_output.put_line('本次的异常code:' || v_sqlcode || chr(10) || '本次的异常信息:' || v_sqlerrm);
+		end;
+		/
+		```
 	2. 使用OCI的C程序中，用erhms()函数（OCIErrorGet()）获得Oracle错误信息。【未验证，网络汇总】
 * 措施: 无。【如果是人为需要获取该异常，则不用做任何操作；如果是逻辑有误，那么需要调整不去此异常或者在遇到此异常时将其屏蔽去掉。】
 
