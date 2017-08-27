@@ -291,7 +291,7 @@ tags: ORACLE,异常
 > All licenses are in use.
 
 * 分析: 很明显，系统中并发用户会话已经达到设置的LICENSE_MAX_SESSIONS值，因此准备要创建的用户会话无法创建。
-* 措施: 增大LICENSE_MAX_SESSIONS初始化参数的值。【详情措施参见[ORA-00018=>原因1=>措施](#措施-增加SESSIONS初始化参数值是否需要增加SESSIONS值还需进行判断是否是由于此值过小而现实场景需要更大的值)，将SQL语句中``name = 'sessions'``修改为``name = 'license_max_sessions'``即可】
+* 措施: 增大LICENSE_MAX_SESSIONS初始化参数的值。【详情措施参见[ORA-00018=>原因1=>措施](#原因1-所有会话状态对象都在使用中部分验证)，将SQL语句中``name = 'sessions'``修改为``name = 'license_max_sessions'``即可】
 
 	> Increase the value of the LICENSE MAX SESSIONS initialization parameter.
 	
@@ -322,7 +322,7 @@ tags: ORACLE,异常
 > All process state objects are in use.
 
 * 分析: 待补充
-* 措施: 增加PROCESSES初始化参数的值。【详情措施参见[ORA-00018=>原因1=>措施](#措施-增加SESSIONS初始化参数值是否需要增加SESSIONS值还需进行判断是否是由于此值过小而现实场景需要更大的值)，将SQL语句中``name = 'sessions'``修改为``name = 'processes'``即可】
+* 措施: 增加PROCESSES初始化参数的值。【详情措施参见[ORA-00018=>原因1=>措施](#原因1-所有会话状态对象都在使用中部分验证)，将SQL语句中``name = 'sessions'``修改为``name = 'processes'``即可】
 
 	> Increase the value of the PROCESSES initialization parameter.
 	

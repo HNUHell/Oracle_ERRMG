@@ -15,7 +15,10 @@
 - ORA-00000、ORA-00001、ORA-00017
 	
 	> QQ: 332643212
+	
 	> 微信: he332643212
+	
 	> Email: 332643212@qq.com、he.lili1@ztesoft.com
+	
 	> 备注: 如无特别注明，测试用例及知识点描述以Oracle Database 11g Release 2 (11.2)为基础，会尽量将其它版本不同之处指出，请见谅！
 	
