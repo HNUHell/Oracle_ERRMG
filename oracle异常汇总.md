@@ -16,9 +16,9 @@ tags: ORACLE,异常
 	* [ORA-00018: 超出最大会话数](#ora-00018-超出最大会话数)
 		* [原因1: 所有会话状态对象都在使用中。【部分验证】](#原因1-所有会话状态对象都在使用中部分验证)
 	* [ORA-00019: 超出最大许可会话数](#ora-00019-超出最大许可会话数)
-		* [原因1: 所有许可会话都在使用中。](#原因1-所有许可会话都在使用中)
+		* [原因1: 所有许可会话都在使用中。【部分验证】](#原因1-所有许可会话都在使用中部分验证)
 	* [ORA-00020: 超出最大进程数(string=>[最大进程数])](#ora-00020-超出最大进程数string最大进程数)
-		* [原因1: 所有进程状态对象都在使用中。](#原因1-所有进程状态对象都在使用中)
+		* [原因1: 所有进程状态对象都在使用中。【部分验证】](#原因1-所有进程状态对象都在使用中部分验证)
 	* [ORA-待补充](#ora-待补充)
 		* [原因1: 待补充](#原因1-待补充)
 
@@ -199,12 +199,12 @@ tags: ORACLE,异常
 
 > All session state objects are in use.
 
-* 分析: 很明显，系统中所有会话数目已经达到设置的SESSIONS值，因此准备要创建的会话无法成功创建，而这个会话包括有用户建立连接至数据库是产生的会话、后台进程产生的会话以及各类涉及到硬解析处理数据字典基表的DML、DDL语句产生的递归会话。
-* 措施: 增加SESSIONS初始化参数值。【是否需要增加SESSIONS值还需进行判断，是否是由于此值过小而现实场景需要更大的值？】
+* 分析: 很明显，系统中所有会话数目已经达到设置的**SESSIONS**值，因此准备要创建的会话无法成功创建，而这个会话包括有用户建立连接至数据库是产生的会话、后台进程产生的会话以及各类涉及到硬解析处理数据字典基表的DML、DDL语句产生的递归会话。
+* 措施: 增加**SESSIONS**初始化参数值。【是否需要增加**SESSIONS**值还需进行判断，是否是由于此值过小而现实场景需要更大的值？】
 
 	> Increase the value of the SESSIONS initialization parameter.
 	
-	- 如果判断确定是由于SESSIONS值过小导致，则需修改增大此参数值: 
+	- 如果判断确定是由于**SESSIONS**值过小导致，则需修改增大此参数值: 
 	
 		```sql
 		 /*
@@ -261,8 +261,7 @@ tags: ORACLE,异常
 		 where name = 'sessions';
 		```
 	
-	- 如果判断确定SESSIONS值合理，则需分析确定产生过量SESSIONS的原因，是否相关程序代码建立了连接未释放？或者其它原因等。【待完善】 
-
+	- 如果判断确定**SESSIONS**值合理，则需分析确定产生大量会话的原因，是否相关程序代码建立了连接未释放？或者其它原因等。【待完善】
 
 * 备注: 
     参数[SESSIONS](http://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams234.htm#REFRN10197):
@@ -270,31 +269,35 @@ tags: ORACLE,异常
 	| 属性 | 描述 |
 	| ---- | ---- |
 	| 参数类型 | Integer |
-	| 默认值 | 派生公式: (1.1 \* PROCESSES) \+ 5） ``[11gR1,11gR2]`` (1.5 \* PROCESSES) \+ 22 |
-	| 可修改(不用重启及时生效) | 否 ``[11gR2,12cR1]`` 可用ALTER SYSTEM修改 |
+	| 默认值 | 派生公式: (1.1 \* **PROCESSES**) \+ 5） ``[11gR1,11gR2]`` (1.5 \* **PROCESSES**) \+ 22 |
+	| 可修改(不用重启及时生效) | 否 ``[11gR2,12cR1]`` 可用**ALTER SYSTEM**修改 |
 	| 取值范围 | 1\~2^31 ``[11gR1,11gR2]`` 1\~2^16(1\~65536) |
 	| 基础参数 | 是 |
 	
-	SESSIONS指定可以在系统中创建的最大会话数。因为每次登录都需要一个会话，所以这个参数有效地确定了系统中最大并发用户数。您应该始终将此参数显式设置等于最大并发用户数的估计值+后台进程数+递归会话数（大约占总数的10%）。
+	**SESSIONS**指定可以在系统中创建的最大会话数。因为每次登录都需要一个会话，所以这个参数有效地确定了系统中最大并发用户数。您应该始终将此参数显式设置等于最大并发用户数的估计值+后台进程数+递归会话数（大约占总数的10%）。
 	
-	Oracle使用此参数的**默认值**作为其**最小值**。 将SESSIONS值设置成\[1~默认值)不会触发错误，因为Oracle会忽略此值直接使用默认值。
+	Oracle使用此参数的**默认值**作为其**最小值**。 将**SESSIONS**值设置成\[1~默认值)不会触发错误，因为Oracle会忽略此值直接使用默认值。
 	
-	ENQUEUE_RESOURCES和TRANSACTIONS参数的默认值派生自SESSIONS。因此，如果增加SESSIONS的值，则应考虑是否也调整ENQUEUE_RESOURCES和TRANSACTIONS的值。 （请注意，从Oracle Database 10g release 2（10.2）起，ENQUEUE_RESOURCES已被废弃	。）
+	**ENQUEUE_RESOURCES**和**TRANSACTIONS**参数的默认值派生自**SESSIONS**。因此，如果增加**SESSIONS**的值，则应考虑是否也调整**ENQUEUE_RESOURCES**和**TRANSACTIONS**的值。 （请注意，从Oracle Database 10g release 2（10.2）起，**ENQUEUE_RESOURCES**已被废弃。）
 	
-	在共享服务器环境中，PROCESSES的值可能相当小。因此，Oracle建议您将SESSIONS的值调整为大约1.1 \*总连接数。
+	在共享服务器环境中，**PROCESSES**的值可能相当小。因此，Oracle建议您将**SESSIONS**的值调整为大约1.1 \*总连接数。
 
 ## ORA-00019: 超出最大许可会话数
 
 > ORA-00019: maximum number of session licenses exceeded
 
-### 原因1: 所有许可会话都在使用中。
+### 原因1: 所有许可会话都在使用中。【部分验证】
 
 > All licenses are in use.
 
-* 分析: 很明显，系统中并发用户会话已经达到设置的LICENSE_MAX_SESSIONS值，因此准备要创建的用户会话无法创建。
-* 措施: 增大LICENSE_MAX_SESSIONS初始化参数的值。【详情措施参见[ORA-00018=>原因1=>措施](#原因1-所有会话状态对象都在使用中部分验证)，将SQL语句中``name = 'sessions'``修改为``name = 'license_max_sessions'``即可】
+* 分析: 很明显，系统中并发用户会话已经达到设置的**LICENSE_MAX_SESSIONS**值，因此准备要创建的用户会话无法创建。
+* 措施: 增大**LICENSE_MAX_SESSIONS**初始化参数的值。【是否需要增加**LICENSE_MAX_SESSIONS**值还需进行判断，是否是由于此值过小而现实场景需要更大的值？】
+
 
 	> Increase the value of the LICENSE MAX SESSIONS initialization parameter.
+	
+	- 如果判断确定是由于**LICENSE_MAX_SESSIONS**值过小导致，则需修改增大此参数值，【详情参见[ORA-00018=>原因1=>措施](#原因1-所有会话状态对象都在使用中部分验证)，将SQL语句中``name = 'sessions'``修改为``name = 'license_max_sessions'``即可】 
+	- 如果判断确定**LICENSE_MAX_SESSIONS**值合理，则需分析确定产生大量会话的原因，是否相关程序代码建立了连接未释放？或者其它原因等。【待完善】
 	
 * 备注: 
 	参数[LICENSE_MAX_SESSIONS](http://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams116.htm#REFRN10079):
@@ -303,30 +306,33 @@ tags: ORACLE,异常
 	| ---- | ---- |
 	| 参数类型 | Integer |
 	| 默认值 | 0 |
-	| 可修改(不用重启及时生效) | 可用ALTER SYSTEM修改 |
+	| 可修改(不用重启及时生效) | 可用**ALTER SYSTEM**修改 |
 	| 取值范围 | 0\~许可会话数 |
 	| 基础参数 | 否 |
 	| Oracle实时应用集群 | 多个实例可以具有不同的值，但是安装数据库的所有实例的总和应小于或等于该数据库许可的会话总数。 |
 	
-	LICENSE_MAX_SESSIONS指定允许的并发用户会话的最大数量。达到此限制后，只有具有RESTRICTED SESSION权限的用户才能连接到数据库。无法连接的用户收到表示系统达到最大容量的警告消息。
+	**LICENSE_MAX_SESSIONS**指定允许的并发用户会话的最大数量。达到此限制后，只有具有RESTRICTED SESSION权限的用户才能连接到数据库。无法连接的用户收到表示系统达到最大容量的警告消息。
 	
-	零值表示不强制执行并发使用（会话）许可。如果将此参数设置为非零数字，则可能还需要设置LICENSE_SESSIONS_WARNING（请参阅“[LICENSE_SESSIONS_WARNING](http://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams117.htm#REFRN10080)”）。
+	零值表示不强制执行并发使用（会话）许可。如果将此参数设置为非零数字，则可能还需要设置**LICENSE_SESSIONS_WARNING**（请参阅“[LICENSE_SESSIONS_WARNING](http://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams117.htm#REFRN10080)”）。
 	
-	不要同时启用并发使用许可和用户许可，即将LICENSE_MAX_SESSIONS或者LICENSE_MAX_USERS要设置为零。
+	不要同时启用并发使用许可和用户许可，即**LICENSE_MAX_SESSIONS**与**LICENSE_MAX_USERS**两参数值至少一个要设置为零。
 
 ## ORA-00020: 超出最大进程数(string=>[最大进程数])
 
 > ORA-00020: maximum number of processes (string) exceeded
 
-### 原因1: 所有进程状态对象都在使用中。
+### 原因1: 所有进程状态对象都在使用中。【部分验证】
 
 > All process state objects are in use.
 
-* 分析: 待补充
-* 措施: 增加PROCESSES初始化参数的值。【详情措施参见[ORA-00018=>原因1=>措施](#原因1-所有会话状态对象都在使用中部分验证)，将SQL语句中``name = 'sessions'``修改为``name = 'processes'``即可】
+* 分析: 很明显，系统中进程数已经达到设置的**PROCESSES**值，因此准备要创建的用户会话无法创建。
+* 措施: 增加**PROCESSES**初始化参数的值。【是否需要增加**PROCESSES**值还需进行判断，是否是由于此值过小而现实场景需要更大的值？】
 
 	> Increase the value of the PROCESSES initialization parameter.
 	
+	- 如果判断确定是由于**PROCESSES**值过小导致，则需修改增大此参数值，【详情参见[ORA-00018=>原因1=>措施](#原因1-所有会话状态对象都在使用中部分验证)，将SQL语句中``name = 'sessions'``修改为``name = 'processes'``即可】 
+	- 如果判断确定**PROCESSES**值合理，则需分析确定产生大量进程的原因，是否相关程序代码建立了连接未释放？或者其它原因等。【待完善】
+
 * 备注: 
 	参数[PROCESSES](http://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams202.htm#REFRN10175):
 
@@ -339,9 +345,9 @@ tags: ORACLE,异常
 	| 基础参数 | 是 |
 	| Oracle实时应用集群 | 多个实例可以具有不同的值。 |
 	
-	PROCESSES指定可以同时连接到Oracle的最大操作系统用户进程数。它的值应允许所有后台进程运行，如锁，作业队列进程和并行执行进程。
+	**PROCESSES**指定可以同时连接到Oracle的最大操作系统用户进程数。它的值应允许所有后台进程运行，如锁，作业队列进程和并行执行进程。
 	
-	该参数派生了SESSIONS和TRANSACTIONS参数的默认值。因此，如果更改PROCESSES的值，则应评估是否要调整这些派生参数的值。
+	该参数派生了**SESSIONS**和**TRANSACTIONS**参数的默认值。因此，如果更改**PROCESSES**的值，则应评估是否要调整这些派生参数的值。
 
 ## ORA-待补充
 
