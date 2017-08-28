@@ -7,10 +7,6 @@
 	- 地址：<https://github.com/HNUHell/Oracle_ERRMG/>
 - 或者您想直接提供或欲求了解某个特定异常的信息，请联系：
 
-	> QQ: 332643212
-	
-	> 微信: he332643212
-	
 	> Email: 332643212@qq.com、he.lili1@ztesoft.com
 
 ## 目录
@@ -49,11 +45,7 @@
 
 - ORA-00000、ORA-00001、ORA-00017、ORA-00018、ORA-00019、ORA-00020
 	
-	> QQ: 332643212
-	
-	> 微信: he332643212
-	
 	> Email: 332643212@qq.com、he.lili1@ztesoft.com
 	
-	> 备注: 如无特别注明，测试用例及知识点描述以Oracle Database 11g Release 2 (11.2)为基础，会尽量将其它版本不同之处指出，请见谅！
+	> 备注: 如无特别注明，测试用例及知识点描述以Oracle Database 11g Release 2 (11gR2)为基础，会尽量将其它版本不同之处指出，请见谅！
 	
