@@ -7,6 +7,7 @@
 	* [ORA-00020: 超出最大进程数(string=>[最大进程数])](ORA-00000_ORA-00877.md#ora-00020-超出最大进程数string最大进程数)
 * [ORA-00900 to ORA-01499](ORA-00900_ORA-01499.md)
 * [ORA-01500 to ORA-02098](ORA-01500_ORA-02098.md)
+	* [ORA-01747: user.table.column, table.column 或列说明无效](ORA-01500_ORA-02098.md#ora-01747-usertablecolumn-tablecolumn-或列说明无效)
 * [ORA-02100 to ORA-04099](ORA-02100_ORA-04099.md)
 * [ORA-04930 to ORA-07499](ORA-04930_ORA-07499.md)
 * [ORA-07500 to ORA-09859](ORA-07500_ORA-09859.md)

@@ -2,34 +2,41 @@
     "title": "数据库异常信息",
     "author": "helili",
     "language": "zh-hans",
-    "gitbook": "3.2.2",
     "root": ".",
+    "links": {
+        "sidebar": {
+            "Oracle Error Message": "https://github.com/HNUHell/Oracle_ERRMG/tree/gitbook/"
+        }
+    },
     "plugins": [
         "expandable-chapters-small",
-		"anchors",
-		"anchor-navigation-ex",
-		"edit-link",
-		"tbfed-pagefooter",
-		"splitter",
-		"donate",
-		"github",
-		"github-buttons"
+        "anchors",
+        "anchor-navigation-ex",
+        "edit-link",
+        "tbfed-pagefooter",
+        "splitter",
+        "donate",
+        "github",
+        "github-buttons",
+        "sitemap",
+        "-lunr", "-search", "search-plus",
+        "-highlight", "prism", "prism-themes"
     ],
     "pluginsConfig": {
         "expandable-chapters-small":{},
-		"anchor-navigation-ex": {
+        "anchor-navigation-ex": {
             
         },
-		"edit-link": {
+        "edit-link": {
             "base": "https://github.com/HNUHell/Oracle_ERRMG/tree/gitbook",
-            "label": "Edit This Page"
+            "label": "编辑本页"
         },
-		"tbfed-pagefooter": {
-			"copyright":"Copyright &copy he.lili 2017",
-			"modify_label": "最新修订日期：",
-			"modify_format": "YYYY-MM-DD HH:mm:ss"
-		},
-		"donate": {
+        "tbfed-pagefooter": {
+            "copyright":"Copyright &copy he.lili 2017",
+            "modify_label": "最新修订日期：",
+            "modify_format": "YYYY-MM-DD HH:mm:ss"
+        },
+        "donate": {
             "wechat": "/images/wechat.png",
             "alipay": "/images/alipay.png",
             "title": "",
@@ -37,17 +44,28 @@
             "alipayText": "支付宝打赏",
             "wechatText": "微信打赏"
         },
-		"github": {
+        "github": {
             "url": "https://github.com/HNUHell/Oracle_ERRMG"
         },
-		"github-buttons": {
+        "github-buttons": {
             "repo": "HNUHell/Oracle_ERRMG",
             "types": [
-                "star",
-                "watch",
-                "fork"
+                "star"
             ],
             "size": "small"
+        },
+        "sitemap": {
+            "hostname": "https://hnuhell.gitbooks.io/oracle_errmg/"
+        },
+        "prism": {
+            "css": [
+              "prism-themes/themes/prism-duotone-earth.css"
+            ]
+        },
+		"fontsettings": {
+            "theme": "sepia",
+            "family": "serif",
+            "size": 4
         }
     }
 }

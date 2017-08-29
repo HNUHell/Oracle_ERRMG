@@ -19,9 +19,9 @@ tags: ORACLE,异常
 		* [原因1: 所有许可会话都在使用中。【部分验证】](#原因1-所有许可会话都在使用中部分验证)
 	* [ORA-00020: 超出最大进程数(string=>[最大进程数])](#ora-00020-超出最大进程数string最大进程数)
 		* [原因1: 所有进程状态对象都在使用中。【部分验证】](#原因1-所有进程状态对象都在使用中部分验证)
-	* [ORA-01747: user.table.column, table.column 或列说明无效【已验证】](#ora-01747-usertablecolumn-tablecolumn-或列说明无效已验证)
-		* [原因1: 列名为关键字。](#原因1-列名为关键字)
-		* [原因2: DML语句缺失列或多逗号。](#原因2-dml语句缺失列或多逗号)
+	* [ORA-01747: user.table.column, table.column 或列说明无效](#ora-01747-usertablecolumn-tablecolumn-或列说明无效)
+		* [原因1: 列名为关键字。【已验证】](#原因1-列名为关键字已验证)
+		* [原因2: DML语句缺失列或多逗号。【已验证】](#原因2-dml语句缺失列或多逗号已验证)
 	* [ORA-待补充](#ora-待补充)
 		* [原因1: 待补充](#原因1-待补充)
 
@@ -352,11 +352,11 @@ tags: ORACLE,异常
 	
 	该参数派生了**SESSIONS**和**TRANSACTIONS**参数的默认值。因此，如果更改**PROCESSES**的值，则应评估是否要调整这些派生参数的值。
 
-## ORA-01747: user.table.column, table.column 或列说明无效【已验证】
+## ORA-01747: user.table.column, table.column 或列说明无效
 
 > ORA-01747: invalid user.table.column, table.column, or column specification
 
-### 原因1: 列名为关键字。
+### 原因1: 列名为关键字。【已验证】
 
 * 分析: 一般为在SQL语句或存储过程、函数等中使用到的此字段为oracle的保留关键字，且保留方式标识了此关键字在某些情况下，例如在DML中是否不允许作为标识符的。如下列情况:
 
@@ -424,7 +424,7 @@ tags: ORACLE,异常
 		
 * 备注: **实际使用时请避免将Oracle保留关键字作为表的字段！**
 
-### 原因2: DML语句缺失列或多逗号。
+### 原因2: DML语句缺失列或多逗号。【已验证】
 
 * 分析: 一般为使用各种方式动态拼接SQL时，拼接有误，使得insert语句或update语句中逗号分隔的左边或右边出现空，示例可参见上面原因1的分析代码。
 * 措施: 检查拼接逻辑，加上缺失字段或去除多余的逗号
