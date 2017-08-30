@@ -3,11 +3,6 @@
     "author": "helili",
     "language": "zh-hans",
     "root": ".",
-    "links": {
-        "sidebar": {
-            "Oracle Error Message": "https://github.com/HNUHell/Oracle_ERRMG/tree/gitbook/"
-        }
-    },
     "plugins": [
         "expandable-chapters-small",
         "anchors",
@@ -45,7 +40,7 @@
             "wechatText": "微信打赏"
         },
         "github": {
-            "url": "https://github.com/HNUHell/Oracle_ERRMG"
+            "url": "https://github.com/HNUHell/Oracle_ERRMG/tree/gitbook"
         },
         "github-buttons": {
             "repo": "HNUHell/Oracle_ERRMG",
