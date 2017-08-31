@@ -32,8 +32,8 @@
             "modify_format": "YYYY-MM-DD HH:mm:ss"
         },
         "donate": {
-            "wechat": "https://github.com/HNUHell/Oracle_ERRMG/tree/gitbook/images/wechat.png",
-            "alipay": "https://github.com/HNUHell/Oracle_ERRMG/tree/gitbook/images/alipay.png",
+            "wechat": "/oracle_errmg/content/images/wechat.png",
+            "alipay": "/oracle_errmg/content/images/alipay.png",
             "title": "",
             "button": "赏",
             "alipayText": "支付宝打赏",
