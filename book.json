@@ -20,7 +20,8 @@
     "pluginsConfig": {
         "expandable-chapters-small":{},
         "anchor-navigation-ex": {
-            
+			"multipleH1" : false,
+			"showLevel" : false
         },
         "edit-link": {
             "base": "https://github.com/HNUHell/Oracle_ERRMG/tree/gitbook",
