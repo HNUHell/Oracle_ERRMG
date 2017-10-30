@@ -41,9 +41,9 @@
 
 ## 联系方式
 
-- ORA-00000、ORA-00001、ORA-00017、ORA-00018、ORA-00019、ORA-00020、ORA-00439、ORA-01502、ORA-01722、ORA-01747、ORA-14048、ORA-14063、ORA-02437、ORA-39083、ORA-39151
+- 如无特殊标注，异常系本人汇总。
 	
 	> Email: 332643212@qq.com、he.lili1@ztesoft.com
 	
-	> 备注: 如无特别注明，异常英文来自[Oracle Database 12c Release 2 官方文档](http://docs.oracle.com/database/122/ERRMG/)，用例代码采用Oracle Database 11g Release 2 测试实践，请见谅！如有不妥当之处烦请联系予以指正。
+	> 备注: 异常英文汇总自[Oracle Database 12c Release 2 官方文档](http://docs.oracle.com/database/122/ERRMG/)、[Oracle Database 12c Release 1 官方文档](http://docs.oracle.com/database/121/ERRMG/)、[Oracle Database 11g Release 2 官方文档](https://docs.oracle.com/cd/E11882_01/server.112/e17766/)、[Oracle Database 11g Release 1 官方文档](https://docs.oracle.com/cd/B28359_01/server.111/b28278/)、[Oracle Database 10g Release 2 官方文档](https://docs.oracle.com/cd/B19306_01/server.102/b14219/)、[Oracle Database 10g Release 1 官方文档](https://docs.oracle.com/cd/B14117_01/server.101/b10744/toc.htm)、[Oracle Database 9i Release 2 官方文档](https://docs.oracle.com/cd/B10501_01/server.920/a96525/toc.htm)、[Oracle Database 9i Release 1 官方文档](https://docs.oracle.com/cd/A91202_01/901_doc/server.901/a90202/toc.htm)
 	

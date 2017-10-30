@@ -29,7 +29,7 @@
         },
         "tbfed-pagefooter": {
             "copyright":"Copyright &copy he.lili 2017",
-            "modify_label": "最新修订日期：",
+            "modify_label": "最新修订日期(UTC时区)：",
             "modify_format": "YYYY-MM-DD HH:mm:ss"
         },
         "donate": {
